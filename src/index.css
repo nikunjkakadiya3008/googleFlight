@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.MuiSelect-select.MuiSelect-filled.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputSizeSmall {
+  padding-top: 10px;
+}
+
+.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputSizeSmall{
+  padding-top: 10px;
+}
