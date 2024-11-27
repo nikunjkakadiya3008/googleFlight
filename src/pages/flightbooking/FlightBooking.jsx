@@ -21,6 +21,7 @@ import dayjs from "dayjs";
 import TorontoFlightCard from "./TorontoFlightCard";
 import Grid from "@mui/material/Grid2";
 import FlightCard2 from "./FlightCard2";
+import FlightCard1 from "./FlightCard1";
 // import FlightCard from "./TorontoFlightCard";
 
 const FlightSearch = () => {
@@ -107,22 +108,22 @@ const FlightSearch = () => {
   const [getFlightData, { isLoading }] = useExploreFlightMutation();
 
   const callExplore = async () => {
-    // const params = {
-    //   originSkyId: selectedFrom?.value?.skyId,
-    //   destinationSkyId: selectedTo?.value?.skyId,
-    //   originEntityId: selectedFrom?.value?.entityId,
-    //   destinationEntityId: selectedTo?.value?.entityId,
-    //   date: dayjs(departureDate).format("YYYY-MM-DD"),
-    //   cabinClass: classType,
-    //   adults: passengers.toString(),
-    //   sortBy: "best",
-    //   currency: "USD",
-    //   market: "en-US",
-    //   countryCode: "US",
-    // };
-    // const data = await getFlightData(params); // Pass the parameters to the mutation function
-    // console.log(data?.data?.itineraries      , "datadatadatadatadata");
-    // setSearchFlightsData(data?.data);
+    const params = {
+      originSkyId: selectedFrom?.value?.skyId,
+      destinationSkyId: selectedTo?.value?.skyId,
+      originEntityId: selectedFrom?.value?.entityId,
+      destinationEntityId: selectedTo?.value?.entityId,
+      date: dayjs(departureDate).format("YYYY-MM-DD"),
+      cabinClass: classType,
+      adults: passengers.toString(),
+      sortBy: "best",
+      currency: "USD",
+      market: "en-US",
+      countryCode: "US",
+    };
+    const data = await getFlightData(params); // Pass the parameters to the mutation function
+    console.log(data.data.data     , "datadatadatadatadata");
+    setSearchFlightsData(data?.data?.data);
   };
   const [searchFlightsData, setSearchFlightsData] = useState({
     context: {
@@ -505,11 +506,10 @@ const FlightSearch = () => {
           Explore
         </Button>
       </Box>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} mt={5}>
         {searchFlightsData?.itineraries?.map((value) => {
           return (
             <Grid size={12}>
-              {/* <FlightCard data={value} /> */}
               <FlightCard2 data={value} />
             </Grid>
           );
