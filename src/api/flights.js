@@ -8,15 +8,6 @@ export const FlightsApi = createApi({
     prepareHeaders: prepareHeaders,
   }),
   endpoints: (builder) => ({
-    getNearByAirports: builder.query({
-      query: (params) => {
-        return {
-          url: '/getNearByAirports',
-          params
-        };
-      },
-      providesTags: ['Airports'],
-    }),
     searchAirport: builder.query({
       query: (params) => {
         return {
@@ -26,10 +17,11 @@ export const FlightsApi = createApi({
       },
       providesTags: ['Airports'],
     }),
-    searchFlights: builder.query({
+    exploreFlight: builder.mutation({
       query: (params) => {
         return {
           url: '/searchFlights',
+          method : "GET",
           params
         };
       },
@@ -40,7 +32,6 @@ export const FlightsApi = createApi({
 });
 
 export const {
-  useGetNearByAirportsQuery,
   useSearchAirportQuery,
-  useSearchFlightsQuery,
+useExploreFlightMutation
 } = FlightsApi;
