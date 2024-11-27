@@ -22,7 +22,9 @@ import TorontoFlightCard from "./TorontoFlightCard";
 import Grid from "@mui/material/Grid2";
 import FlightCard2 from "./FlightCard2";
 import FlightCard1 from "./FlightCard1";
+import FlightCard3 from "./FlightCard3";
 // import FlightCard from "./TorontoFlightCard";
+import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 
 const FlightSearch = () => {
   const [tripType, setTripType] = useState("One-way");
@@ -91,23 +93,15 @@ const FlightSearch = () => {
     setSelectedTo(tempSelected);
   };
 
-  // const { date: searchFlights, refetch,isLoading } = useSearchFlightsQuery({
-  //   originSkyId: selectedFrom?.value?.skyId,
-  //   destinationSkyId: selectedTo?.value?.skyId,
-  //   originEntityId: selectedFrom?.value?.entityId,
-  //   destinationEntityId: selectedTo?.value?.entityId,
-  //   date: dayjs(departureDate).format("YYYY-MM-DD"),
-  //   cabinClass: classType,
-  //   adults: passengers.toString(),
-  //   sortBy: "best",
-  //   currency: "USD",
-  //   market: "en-US",
-  //   countryCode: "US",
-  // });
-
   const [getFlightData, { isLoading }] = useExploreFlightMutation();
+  const [error, setError] = useState('');
+  console.log('error: ', error);
 
   const callExplore = async () => {
+    if (!selectedFrom?.value?.skyId || !selectedTo?.value?.skyId || !selectedFrom?.value?.entityId || !selectedTo?.value?.entityId || !departureDate || !classType || passengers < 1) {
+      setError('Something went wrong!')
+      return
+    }
     const params = {
       originSkyId: selectedFrom?.value?.skyId,
       destinationSkyId: selectedTo?.value?.skyId,
@@ -122,172 +116,16 @@ const FlightSearch = () => {
       countryCode: "US",
     };
     const data = await getFlightData(params); // Pass the parameters to the mutation function
-    console.log(data.data.data     , "datadatadatadatadata");
+    console.log(data.data.data, "datadatadatadatadata");
     setSearchFlightsData(data?.data?.data);
   };
+
   const [searchFlightsData, setSearchFlightsData] = useState({
     context: {
       status: "complete",
       totalResults: 44,
     },
     itineraries: [
-      {
-        id: "10075-2411272315--32213-1-15466-2411280410",
-        price: {
-          raw: 125.99,
-          formatted: "$126",
-          pricingOptionId: "hz9uvWCt6MuV",
-        },
-        legs: [
-          {
-            id: "10075-2411272315--32213-1-15466-2411280410",
-            origin: {
-              id: "BOM",
-              entityId: "95673320",
-              name: "Mumbai",
-              displayCode: "BOM",
-              city: "Mumbai",
-              country: "India",
-              isHighlighted: false,
-            },
-            destination: {
-              id: "PNQ",
-              entityId: "128668941",
-              name: "Pune",
-              displayCode: "PNQ",
-              city: "Pune",
-              country: "India",
-              isHighlighted: false,
-            },
-            durationInMinutes: 295,
-            stopCount: 1,
-            isSmallestStops: false,
-            departure: "2024-11-27T23:15:00",
-            arrival: "2024-11-28T04:10:00",
-            timeDeltaInDays: 1,
-            carriers: {
-              marketing: [
-                {
-                  id: -32213,
-                  alternateId: "49",
-                  logoUrl:
-                    "https://logos.skyscnr.com/images/airlines/favicon/49.png",
-                  name: "IndiGo",
-                },
-              ],
-              operationType: "fully_operated",
-            },
-            segments: [
-              {
-                id: "10075-9436-2411272315-2411280025--32213",
-                origin: {
-                  flightPlaceId: "BOM",
-                  displayCode: "BOM",
-                  parent: {
-                    flightPlaceId: "IBOM",
-                    displayCode: "BOM",
-                    name: "Mumbai",
-                    type: "City",
-                  },
-                  name: "Mumbai",
-                  type: "Airport",
-                  country: "India",
-                },
-                destination: {
-                  flightPlaceId: "AMD",
-                  displayCode: "AMD",
-                  parent: {
-                    flightPlaceId: "IAMD",
-                    displayCode: "AMD",
-                    name: "Ahmedabad",
-                    type: "City",
-                  },
-                  name: "Ahmedabad",
-                  type: "Airport",
-                  country: "India",
-                },
-                departure: "2024-11-27T23:15:00",
-                arrival: "2024-11-28T00:25:00",
-                durationInMinutes: 70,
-                flightNumber: "296",
-                marketingCarrier: {
-                  id: -32213,
-                  name: "IndiGo",
-                  alternateId: "49",
-                  allianceId: 0,
-                  displayCode: "",
-                },
-                operatingCarrier: {
-                  id: -32213,
-                  name: "IndiGo",
-                  alternateId: "49",
-                  allianceId: 0,
-                  displayCode: "",
-                },
-              },
-              {
-                id: "9436-15466-2411280300-2411280410--32213",
-                origin: {
-                  flightPlaceId: "AMD",
-                  displayCode: "AMD",
-                  parent: {
-                    flightPlaceId: "IAMD",
-                    displayCode: "AMD",
-                    name: "Ahmedabad",
-                    type: "City",
-                  },
-                  name: "Ahmedabad",
-                  type: "Airport",
-                  country: "India",
-                },
-                destination: {
-                  flightPlaceId: "PNQ",
-                  displayCode: "PNQ",
-                  parent: {
-                    flightPlaceId: "IPNQ",
-                    displayCode: "PNQ",
-                    name: "Pune",
-                    type: "City",
-                  },
-                  name: "Pune",
-                  type: "Airport",
-                  country: "India",
-                },
-                departure: "2024-11-28T03:00:00",
-                arrival: "2024-11-28T04:10:00",
-                durationInMinutes: 70,
-                flightNumber: "699",
-                marketingCarrier: {
-                  id: -32213,
-                  name: "IndiGo",
-                  alternateId: "49",
-                  allianceId: 0,
-                  displayCode: "",
-                },
-                operatingCarrier: {
-                  id: -32213,
-                  name: "IndiGo",
-                  alternateId: "49",
-                  allianceId: 0,
-                  displayCode: "",
-                },
-              },
-            ],
-          },
-        ],
-        isSelfTransfer: false,
-        isProtectedSelfTransfer: true,
-        farePolicy: {
-          isChangeAllowed: false,
-          isPartiallyChangeable: false,
-          isCancellationAllowed: false,
-          isPartiallyRefundable: false,
-        },
-        fareAttributes: {},
-        isMashUp: false,
-        hasFlexibleOptions: false,
-        score: 0.999,
-      },
     ],
     messages: [],
     filterStats: {
@@ -365,155 +203,198 @@ const FlightSearch = () => {
         borderRadius: 2,
       }}
     >
-      <Typography variant="h4" textAlign="center" mb={3}>
-        Flights
-      </Typography>
+      <div style={{ border: '1px solid #8e8e8e', borderRadius: 10, padding: 15 }}>
+        <Typography variant="h4" textAlign="center" mb={3}>
+          Flights search
+        </Typography>
 
-      {/* Top Controls */}
-      <Box display="flex" justifyContent="space-between" mb={2}>
-        <TextField
-          select
-          value={tripType}
-          onChange={(e) => setTripType(e.target.value)}
-          size="small"
-        >
-          {/* <MenuItem value="Round trip">Round trip</MenuItem> */}
-          <MenuItem value="One-way">One-way</MenuItem>
-        </TextField>
+        {/* Top Controls */}
+        <Box display="flex" mb={2} gap={1}>
+          <TextField
+            select
+            value={tripType}
+            onChange={(e) => setTripType(e.target.value)}
+            size="small"
+            variant="filled"
+            placeholder="Trip"
+          >
+            <MenuItem value="One-way">One-way</MenuItem>
+            <MenuItem value="Round trip">Round trip</MenuItem>
+          </TextField>
 
-        <TextField
-          type="number"
-          value={passengers}
-          onChange={(e) => setPassengers(e.target.value)}
-          size="small"
-          InputProps={{ inputProps: { min: 1 } }}
-        />
-        <TextField
-          select
-          value={classType}
-          onChange={(e) => setClassType(e.target.value)}
-          size="small"
-        >
-          <MenuItem value="economy">Economy</MenuItem>
-          <MenuItem value="business">Business</MenuItem>
-        </TextField>
-      </Box>
-
-      {/* Location and Date Selection */}
-      <Box display="flex" alignItems="center" gap={2} mb={3}>
-        <Autocomplete
-          fullWidth
-          value={selectedFrom}
-          onInputChange={(e, newValue) => debouncedFromSearch(newValue)} // Call debounced function
-          onChange={(e, newValue) => {
-            setSelectedFrom(newValue);
-            setFrom(newValue?.value?.presentation?.title || ""); // Use newValue.value to access the full object
-          }}
-          options={locationOptionsFrom} // Use the separate location options for "From"
-          getOptionLabel={(option) => option?.label || ""} // Use the 'label' field
-          isOptionEqualToValue={(option, value) =>
-            option.label === value?.label
-          } // Ensure comparison works
-          loading={isFromFetching}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="From"
-              fullWidth
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {isFromFetching ? <CircularProgress size={20} /> : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-            />
-          )}
-        />
-
-        <IconButton onClick={handleSwapLocations}>
-          <SwapHorizIcon />
-        </IconButton>
-
-        <Autocomplete
-          fullWidth
-          value={selectedTo}
-          onInputChange={(e, newValue) => debouncedToSearch(newValue)} // Call debounced function
-          onChange={(e, newValue) => {
-            setSelectedTo(newValue);
-            setTo(newValue?.value?.presentation?.title || ""); // Use newValue.value to access the full object
-          }}
-          options={locationOptionsTo} // Use the separate location options for "To"
-          getOptionLabel={(option) => option?.label || ""}
-          isOptionEqualToValue={(option, value) =>
-            option.label === value?.label
-          } // Ensure comparison works
-          loading={isToFetching}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="To"
-              fullWidth
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {isToFetching ? <CircularProgress size={20} /> : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-            />
-          )}
-        />
-      </Box>
-
-      <Box display="flex" gap={2} mb={3}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            label="Departure"
-            value={departureDate}
-            onChange={(newValue) => setDepartureDate(newValue)}
-            renderInput={(params) => <TextField {...params} fullWidth />}
+          <TextField
+            type="number"
+            value={passengers}
+            onChange={(e) => setPassengers(e.target.value)}
+            size="small"
+            variant="filled"
+            InputProps={{ inputProps: { min: 1 } }}
+            placeholder="No of person"
           />
-          {tripType === "Round trip" && (
-            <DatePicker
-              label="Return"
-              value={returnDate}
-              onChange={(newValue) => setReturnDate(newValue)}
-              renderInput={(params) => <TextField {...params} fullWidth />}
-            />
-          )}
-        </LocalizationProvider>
-      </Box>
+          <TextField
+            select
+            value={classType}
+            onChange={(e) => setClassType(e.target.value)}
+            variant="filled"
+            size="small"
+            placeholder="Class"
+          >
+            <MenuItem value="economy">Economy</MenuItem>
+            <MenuItem value="business">Business</MenuItem>
+            {/* <MenuItem value="First">First</MenuItem> */}
+          </TextField>
+        </Box>
+        <Grid container spacing={2}>
+          <Grid size={7}>
+            {/* Location and Date Selection */}
+            <Box display="flex" alignItems="center" gap={2} mb={3}>
+              <Autocomplete
+                fullWidth
+                value={selectedFrom}
+                onInputChange={(e, newValue) => debouncedFromSearch(newValue)} // Call debounced function
+                onChange={(e, newValue) => {
+                  setSelectedFrom(newValue);
+                  setFrom(newValue?.value?.presentation?.title || ""); // Use newValue.value to access the full object
+                }}
+                options={locationOptionsFrom} // Use the separate location options for "From"
+                getOptionLabel={(option) => option?.label || ""} // Use the 'label' field
+                isOptionEqualToValue={(option, value) =>
+                  option.label === value?.label
+                } // Ensure comparison works
+                loading={isFromFetching}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="From"
+                    fullWidth
+                    InputProps={{
+                      ...params.InputProps,
+                      endAdornment: (
+                        <>
+                          {isFromFetching ? <CircularProgress size={20} /> : null}
+                          {params.InputProps.endAdornment}
+                        </>
+                      ),
+                    }}
+                  />
+                )}
+              />
 
-      {/* Explore Button */}
-      <Box textAlign="center">
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          onClick={callExplore}
-          disabled={isLoading} // Disable button when loading
-          endIcon={
-            isLoading ? (
-              <CircularProgress size={20} color="inherit" /> // Loading spinner as endIcon
-            ) : null
-          }
-        >
-          Explore
-        </Button>
-      </Box>
+              <IconButton onClick={handleSwapLocations}>
+                <SwapHorizIcon />
+              </IconButton>
+
+              <Autocomplete
+                fullWidth
+                value={selectedTo}
+                onInputChange={(e, newValue) => debouncedToSearch(newValue)} // Call debounced function
+                onChange={(e, newValue) => {
+                  setSelectedTo(newValue);
+                  setTo(newValue?.value?.presentation?.title || ""); // Use newValue.value to access the full object
+                }}
+                options={locationOptionsTo} // Use the separate location options for "To"
+                getOptionLabel={(option) => option?.label || ""}
+                isOptionEqualToValue={(option, value) =>
+                  option.label === value?.label
+                } // Ensure comparison works
+                loading={isToFetching}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="To"
+                    fullWidth
+                    InputProps={{
+                      ...params.InputProps,
+                      endAdornment: (
+                        <>
+                          {isToFetching ? <CircularProgress size={20} /> : null}
+                          {params.InputProps.endAdornment}
+                        </>
+                      ),
+                    }}
+                  />
+                )}
+              />
+            </Box>
+          </Grid>
+          <Grid size={5}>
+            <Box display="flex" gap={2} mb={3}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="Departure"
+                  value={departureDate}
+                  onChange={(newValue) => {
+                    setDepartureDate(newValue)
+                    setReturnDate(null)
+                  }}
+                  renderInput={(params) => <TextField {...params} fullWidth />}
+                />
+                {tripType === "Round trip" && (
+                  <DatePicker
+                    label="Return"
+                    value={returnDate}
+                    onChange={(newValue) => setReturnDate(newValue)}
+                    renderInput={(params) => <TextField {...params} fullWidth />}
+                    minDate={departureDate}
+                  />
+                )}
+              </LocalizationProvider>
+            </Box>
+          </Grid>
+        </Grid>
+
+        {/* Explore Button */}
+        <Box textAlign="center">
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={callExplore}
+            disabled={isLoading} // Disable button when loading
+            endIcon={
+              isLoading ? (
+                <CircularProgress size={20} color="inherit" /> // Loading spinner as endIcon
+              ) : null
+            }
+            style={{ borderRadius: '10px', textTransform: 'capitalize' }}
+          >
+            Explore
+          </Button>
+        </Box>
+      </div>
       <Grid container spacing={2} mt={5}>
-        {searchFlightsData?.itineraries?.map((value) => {
-          return (
-            <Grid size={12}>
-              <FlightCard2 data={value} />
-            </Grid>
-          );
-        })}
+        {isLoading ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "20px",
+              width: '100%'
+            }}
+          >
+            <FlightTakeoffIcon style={{ fontSize: "50px" }} />
+          </div>
+        )
+          :
+          searchFlightsData?.itineraries?.length === 0 ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+                marginTop: "30px",
+              }}
+            >
+              <h2>oops! Data not found...</h2>
+            </div>
+          )
+            : searchFlightsData?.itineraries?.map((value) => {
+              return (
+                <Grid size={12}>
+                  <FlightCard3 data={value} />
+                </Grid>
+              );
+            })}
       </Grid>
     </Box>
   );

@@ -15,3 +15,8 @@ export const dateToTimeFormat = (date) => {
     return dayjs(date).format("h:mm A")
 };
 
+export const calculateDateDifference = (date1, date2, unit = 'minute') =>{
+    const d1 = dayjs(date1);
+    const d2 = dayjs(date2);
+    return d1.diff(d2, unit);
+}
