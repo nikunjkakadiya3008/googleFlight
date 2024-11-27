@@ -7,7 +7,7 @@ import {
 import FlightSummary from "./FlightSummary";
 import FlightItinerary from "./FlightItinerary";
 
-const FlightCard3 = ({ data }) => {
+const FlightCard = ({ data }) => {
   return (
     <div>
       {data?.legs?.map((legs) => {
@@ -28,5 +28,5 @@ const FlightCard3 = ({ data }) => {
   );
 };
 
-export default FlightCard3;
+export default FlightCard;
 

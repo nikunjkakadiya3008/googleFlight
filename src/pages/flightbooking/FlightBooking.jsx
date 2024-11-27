@@ -16,14 +16,10 @@ import {
   useExploreFlightMutation,
   useSearchAirportQuery,
 } from "../../api/flights";
-import { debounce } from "lodash"; // Import debounce from lodash
+import { debounce } from "lodash";
 import dayjs from "dayjs";
-import TorontoFlightCard from "./TorontoFlightCard";
 import Grid from "@mui/material/Grid2";
-import FlightCard2 from "./FlightCard2";
-import FlightCard1 from "./FlightCard1";
-import FlightCard3 from "./FlightCard3";
-// import FlightCard from "./TorontoFlightCard";
+import FlightCard from "./FlightCard";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 
 const FlightSearch = () => {
@@ -38,7 +34,7 @@ const FlightSearch = () => {
   const [selectedTo, setSelectedTo] = useState(null);
 
   const [fromInput, setFromInput] = useState("");
-  const [toInput, setToInput] = useState(""); // User input for "To"
+  const [toInput, setToInput] = useState("");
 
   // Separate state for location options for "From" and "To"
   const [locationOptionsFrom, setLocationOptionsFrom] = useState([]);
@@ -116,7 +112,6 @@ const FlightSearch = () => {
       countryCode: "US",
     };
     const data = await getFlightData(params); // Pass the parameters to the mutation function
-    console.log(data.data.data, "datadatadatadatadata");
     setSearchFlightsData(data?.data?.data);
   };
 
@@ -188,8 +183,6 @@ const FlightSearch = () => {
     destinationImageUrl:
       "https://content.skyscnr.com/m/3719e8f4a5daf43d/original/Flights-Placeholder.jpg",
   });
-
-  console.log(searchFlightsData, "searchFlightsData");
 
   return (
     <Box
@@ -391,7 +384,7 @@ const FlightSearch = () => {
             : searchFlightsData?.itineraries?.map((value) => {
               return (
                 <Grid size={12}>
-                  <FlightCard3 data={value} />
+                  <FlightCard data={value} />
                 </Grid>
               );
             })}

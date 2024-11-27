@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, Typography, Chip, Stack, Divider, IconButton } from '@mui/material';
+import { Box, Card, Typography, Stack, Divider, IconButton } from '@mui/material';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import FlightLandIcon from '@mui/icons-material/FlightLand';
 import dayjs from 'dayjs';

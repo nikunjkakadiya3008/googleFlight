@@ -1,11 +1,10 @@
 import React from 'react';
-import { Card, CardContent, Typography, Button, Chip, IconButton, Box, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Button, IconButton, Box, Grid } from '@mui/material';
 import { Share, MoreHoriz } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import { dateToTimeFormat, minToTime } from '../../utils/common';
 
 const StyledCard = styled(Card)(({ theme }) => ({
-    //   maxWidth: 800,
     width: '100%',
     margin: 'auto',
     boxShadow: 'none',
@@ -37,7 +36,6 @@ export default function FlightSummary({ data, legs }) {
         <StyledCard>
             <CardContent>
                 <Box display="flex" justifyContent="space-between" alignItems="flex-start">
-                    {/* <Chip label="Best" color="primary" size="small" /> */}
                     <div></div>
                     <Box>
                         <IconButton size="small" aria-label="share">
@@ -76,23 +74,6 @@ export default function FlightSummary({ data, legs }) {
                                 <Typography variant="body2" mb={1}>
                                     {legs.carriers.marketing[0].name}
                                 </Typography>
-                                {/* <Box display="flex" alignItems="center">
-                                    <Typography variant="body1" fontWeight="bold" mr={1}>
-                                        ₹ 9,681
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary" mr={2}>
-                                        EaseMyTrip
-                                    </Typography>
-                                    <Typography variant="body1" fontWeight="bold" mr={1}>
-                                        ₹ 9,846
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary" mr={2}>
-                                        FlightMojo
-                                    </Typography>
-                                    <Button color="primary" size="small">
-                                        +1 more
-                                    </Button>
-                                </Box> */}
                             </Box>
                         </Box>
                     </Grid>
