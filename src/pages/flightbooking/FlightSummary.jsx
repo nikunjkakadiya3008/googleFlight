@@ -1,8 +1,9 @@
 import React from 'react';
-import { Card, CardContent, Typography, Button, IconButton, Box, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Button, IconButton, Box } from '@mui/material';
 import { Share, MoreHoriz } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import { dateToTimeFormat, minToTime } from '../../utils/common';
+import Grid from '@mui/material/Grid2';
 
 const StyledCard = styled(Card)(({ theme }) => ({
     width: '100%',
@@ -48,7 +49,7 @@ export default function FlightSummary({ data, legs }) {
                 </Box>
 
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={8}>
+                    <Grid item size={{ xs: 12, sm: 8 }}>
                         <Box display="flex" alignItems="flex-start">
                             <Box mr={2}>
                                 <img src={legs.carriers.marketing[0].logoUrl} alt="Air India" style={{ width: 40, height: 40 }} />
@@ -77,13 +78,13 @@ export default function FlightSummary({ data, legs }) {
                             </Box>
                         </Box>
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item size={{ xs: 12, sm: 4 }}>
                         <Box display="flex" flexDirection="column" alignItems="flex-end" justifyContent={"space-around"} height={'100%'}>
                             <PriceTypography component="div" gutterBottom>
                                 {data?.price?.formatted}
                             </PriceTypography>
                             <ViewDealButton variant="contained" fullWidth>
-                                View Deal
+                                View Detail
                             </ViewDealButton>
                         </Box>
                     </Grid>

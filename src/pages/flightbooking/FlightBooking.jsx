@@ -28,7 +28,7 @@ const FlightSearch = () => {
   const [classType, setClassType] = useState("economy");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const [departureDate, setDepartureDate] = useState(null);
+  const [departureDate, setDepartureDate] = useState(dayjs().startOf('day'));
   const [returnDate, setReturnDate] = useState(null);
   const [selectedFrom, setSelectedFrom] = useState(null);
   const [selectedTo, setSelectedTo] = useState(null);
@@ -115,74 +115,7 @@ const FlightSearch = () => {
     setSearchFlightsData(data?.data?.data);
   };
 
-  const [searchFlightsData, setSearchFlightsData] = useState({
-    context: {
-      status: "complete",
-      totalResults: 44,
-    },
-    itineraries: [
-    ],
-    messages: [],
-    filterStats: {
-      duration: {
-        min: 200,
-        max: 1665,
-        multiCityMin: 200,
-        multiCityMax: 1665,
-      },
-      airports: [
-        {
-          city: "Mumbai",
-          airports: [
-            {
-              id: "BOM",
-              entityId: "95673320",
-              name: "Mumbai",
-            },
-          ],
-        },
-        {
-          city: "Pune",
-          airports: [
-            {
-              id: "PNQ",
-              entityId: "128668941",
-              name: "Pune",
-            },
-          ],
-        },
-      ],
-      carriers: [
-        {
-          id: -32672,
-          alternateId: "AI",
-          logoUrl: "https://logos.skyscnr.com/images/airlines/favicon/AI.png",
-          name: "Air India",
-        },
-        {
-          id: -32213,
-          alternateId: "49",
-          logoUrl: "https://logos.skyscnr.com/images/airlines/favicon/49.png",
-          name: "IndiGo",
-        },
-      ],
-      stopPrices: {
-        direct: {
-          isPresent: false,
-        },
-        one: {
-          isPresent: true,
-          formattedPrice: "$115",
-        },
-        twoOrMore: {
-          isPresent: false,
-        },
-      },
-    },
-    flightsSessionId: "acc780dc-48df-40b6-9bcf-48320e812af4",
-    destinationImageUrl:
-      "https://content.skyscnr.com/m/3719e8f4a5daf43d/original/Flights-Placeholder.jpg",
-  });
+  const [searchFlightsData, setSearchFlightsData] = useState();
 
   return (
     <Box
@@ -198,7 +131,7 @@ const FlightSearch = () => {
     >
       <div style={{ border: '1px solid #8e8e8e', borderRadius: 10, padding: 15 }}>
         <Typography variant="h4" textAlign="center" mb={3}>
-          Flights search
+          Flights Search
         </Typography>
 
         {/* Top Controls */}
@@ -234,7 +167,6 @@ const FlightSearch = () => {
           >
             <MenuItem value="economy">Economy</MenuItem>
             <MenuItem value="business">Business</MenuItem>
-            {/* <MenuItem value="First">First</MenuItem> */}
           </TextField>
         </Box>
         <Grid container spacing={2}>
@@ -253,7 +185,7 @@ const FlightSearch = () => {
                 getOptionLabel={(option) => option?.label || ""} // Use the 'label' field
                 isOptionEqualToValue={(option, value) =>
                   option.label === value?.label
-                } // Ensure comparison works
+                }
                 loading={isFromFetching}
                 renderInput={(params) => (
                   <TextField
@@ -320,6 +252,7 @@ const FlightSearch = () => {
                     setDepartureDate(newValue)
                     setReturnDate(null)
                   }}
+                  minDate={dayjs().startOf('day')}
                   renderInput={(params) => <TextField {...params} fullWidth />}
                 />
                 {tripType === "Round trip" && (
