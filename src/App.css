@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.MuiButtonBase-root.MuiAccordionSummary-root.MuiAccordionSummary-gutters{
+  padding: 0;
+}
+
+.MuiAccordionSummary-content.MuiAccordionSummary-contentGutters{
+  margin: 0;
+}
+
+.MuiAccordionSummary-content.Mui-expanded.MuiAccordionSummary-contentGutters{
+  margin: 0;
+}
+
+.MuiSelect-select.MuiSelect-filled.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputSizeSmall {
+  padding-top: 10px;
+}
+
+.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputSizeSmall{
+  padding-top: 10px;
+}

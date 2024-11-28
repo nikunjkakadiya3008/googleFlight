@@ -1,5 +1,4 @@
 import { Navigate, useRoutes } from "react-router-dom";
-import { Login } from "./pages/login";
 import Page404 from "./components/Page404";
 import FlightBooking from "./pages/flightbooking/FlightBooking";
 
@@ -8,8 +7,7 @@ export default function Router() {
     {
       path: "/",
       children: [
-        { path: "/", element: <Login /> },
-        { path: "/booking", element: <FlightBooking /> },
+        { path: "/", element: <FlightBooking /> },
       ],
     },
     {

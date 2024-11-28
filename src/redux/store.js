@@ -1,17 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
-import { LoginApi } from "../api/Login";
+import { FlightsApi, LoginApi } from "../api/flights";
 import _ from "lodash";
 import cartReducer, { cartSlice } from "./slices/CartSlice";
 
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
-    [LoginApi.reducerPath]: LoginApi.reducer,
+    [FlightsApi.reducerPath]: FlightsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(LoginApi.middleware)
+      .concat(FlightsApi.middleware)
 });
 
 setupListeners(store.dispatch);
